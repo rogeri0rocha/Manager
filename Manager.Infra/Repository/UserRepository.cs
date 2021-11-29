@@ -23,7 +23,7 @@ namespace Manager.Infra.Repository
                                    .Where
                                    (
                                         x =>
-                                            x.Email.ToLower() == email.ToLower()
+                                            x.email.ToLower() == email.ToLower()
                                     )
                                     .AsNoTracking()
                                     .ToListAsync();
