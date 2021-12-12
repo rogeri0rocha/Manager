@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Manager.Domain.Entities;
 using Manager.Infra.Context;
-using Manager.Infra.Interfaces;
+using Manager.Infra.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace Manager.Infra.Repository
@@ -23,7 +23,7 @@ namespace Manager.Infra.Repository
                                    .Where
                                    (
                                         x =>
-                                            x.email.ToLower() == email.ToLower()
+                                            x.Email.ToLower() == email.ToLower()
                                     )
                                     .AsNoTracking()
                                     .ToListAsync();

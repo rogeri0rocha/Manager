@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Manager.Infra.Repository
 {
-    internal class BaseRepository<T> : IBaseRepository<T> where T : Base
+    public class BaseRepository<T> : IBaseRepository<T> where T : Base
     {
         private readonly ManagerContext _context;
         public BaseRepository(ManagerContext context)
@@ -28,7 +28,7 @@ namespace Manager.Infra.Repository
 
         public virtual async Task<T> Update(T obj)
         {
-            _context.Entry(obj).State = EntityState.Modified;
+            _context.Entry(obj).State = EntityState.Modified; 
             await _context.SaveChangesAsync();
 
             return obj;

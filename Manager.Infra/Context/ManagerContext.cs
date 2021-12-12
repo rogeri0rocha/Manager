@@ -1,17 +1,28 @@
-﻿
+﻿using Manager.Domain.Entities;
+using Manager.Infra.Mapping;
 
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Manager.Infra.Context
 {
-    internal class ManagerContext : DbContext
+    public class ManagerContext : DbContext
     {
-        internal IEnumerable<object> Users;
-
         public ManagerContext()
-        {
+        { }
 
+        public ManagerContext(DbContextOptions<ManagerContext> options) : base(options)
+        { }
+
+        public virtual DbSet<User> Users { get; set; }
+
+        protected override void  OnConfiguring(DbContextOptionsBuilder optionsnuilder)
+        {
+            optionsnuilder.UseSqlServer(@"Data Source=DESKTOP-RVHNPJ7\MSSQLSERVER1; Initial Catalog=UserManagerAPI; User Id=; Password=;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new UserMap());
         }
     }
 }
