@@ -31,7 +31,7 @@ namespace Manager
         {
             app.UseSwagger();
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Manager.API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Manager");
                 });
 
             if (env.IsDevelopment())

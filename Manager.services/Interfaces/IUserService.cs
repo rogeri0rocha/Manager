@@ -10,9 +10,7 @@ namespace Manager.services.Interfaces
 {
     public interface IUserService
     {
-        public interface IUserService
-        {
-            Task<UserDTO> Create(UserDTO userDTO);
+         Task<UserDTO> Create(UserDTO userDTO);
             Task<UserDTO> Update(UserDTO userDTO);
             Task Remove(long id);
             Task<UserDTO> Get(long id);
@@ -22,4 +20,4 @@ namespace Manager.services.Interfaces
             Task<UserDTO> GetByEmail(string email);
         }
     }
-}
+
