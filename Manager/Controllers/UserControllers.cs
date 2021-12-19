@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Manager.services.Interfaces;
 using AutoMapper;
 using Manager.services.DTO;
+using Manager.Utilitis;
 
 namespace Manager.Controllers
 {
@@ -25,22 +26,28 @@ namespace Manager.Controllers
     
         [HttpPost]
         [Route("/api/v1/user/create")]
-        public async Task<IActionResult> create([FromBody]CreateUserViewModel createUserViewModel)
+        public async Task<IActionResult> Create([FromBody]CreateUserViewModel createUserViewModel)
         {
             try
             {
                 var userDTO = _mapper.Map<UserDTO>(createUserViewModel);
                 var userCreate = await _userService.Create(userDTO);
-                return Ok();
+                return Ok(
+                   new ResultViewModel
+                   {
+                       Message = "Usuário criado com sucesso",
+                       Success = true,
+                       Data = userCreate
+                   });
             }
 
             catch (DomainException ex)
-            { 
-                return BadRequest(ex.Message);
+            {
+                return BadRequest(Responses.DomainErrorMessage(ex.Message));
             }
             catch(Exception)
             {
-                return StatusCode(500);
+                return StatusCode(500, Responses.ApplicationErrorMessage());
             }
         }
 
